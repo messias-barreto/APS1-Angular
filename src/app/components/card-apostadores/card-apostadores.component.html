@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-body text-center">
+    <p class="card-text"> {{title}} </p>
+    <hr />
+    <p *ngIf="apostas.length === 0; else showAposta" class="card-text">Ainda não apostou</p>
+    <ng-template #showAposta>
+      <div class="row">
+        <div *ngFor="let numero of apostas" class="apostas col-1">
+          <button class="btn btn-danger">{{numero}}</button>
+        </div>
+      </div>
+    </ng-template>
+
+    <button *ngIf="apostas.length < 6; else finalizarAposta" (click)="selecionarApostador()" class="btn btn-primary">Selecionar Apostador</button>
+    <ng-template #finalizarAposta>
+      <button class="btn btn-danger" disabled="true">Aposta Finalizada</button>
+    </ng-template>
+  </div>
+</div>

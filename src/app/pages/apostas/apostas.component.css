@@ -1,0 +1,49 @@
+.title {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.integrantes {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-top: 40px;
+}
+
+.startPlay {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.cards-apostas {
+  margin-top: 40px;
+}
+
+
+.input-qtd-apostas {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.numeros-apostas {
+  margin-top: 40px;
+}
+
+.input {
+  width: 300px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.resultado {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-top: 40px;
+}

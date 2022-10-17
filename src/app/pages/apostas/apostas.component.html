@@ -1,0 +1,69 @@
+<h4 *ngIf="!showApostas" class="title"> Selecione o Número de Apostadores</h4>
+<div *ngIf="!showApostas" class="container integrantes">
+  <div class="form-check form-check-inline">
+    <input (click)="selecionarJogadores(1)" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+    <label class="form-check-label" for="inlineRadio1">1 Apostador</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input (click)="selecionarJogadores(2)" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+    <label class="form-check-label" for="inlineRadio2">2 Apostadores</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input (click)="selecionarJogadores(3)" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+    <label class="form-check-label" for="inlineRadio3">3 Apostadores</label>
+  </div>
+</div>
+
+<div *ngIf="showApostas" class="container cards-apostas">
+  <h4 class="title"> Selecione Apostador</h4>
+  <div class="row">
+    <div *ngFor="let dado of dados" class="col-4">
+      <app-card-apostadores [id]="dado.id"
+                            [title]="dado.apostador"
+                            [apostas]="dado.aposta"
+                            (apostador)="selectionarJogador($event)">
+      </app-card-apostadores>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showTabuleiroNumeros && qtd_numeros_selecionados < dados.length * 6" class="container numeros-apostas">
+  <div class="row">
+    <app-realizar-apostas [num_botao]="numBotao[0]" [apostador_id]="apostadorSelecionado" (botao)="adicionarNumeroAposta($event)"></app-realizar-apostas>
+    <app-realizar-apostas [num_botao]="numBotao[1]" [apostador_id]="apostadorSelecionado" (botao)="adicionarNumeroAposta($event)"></app-realizar-apostas>
+    <app-realizar-apostas [num_botao]="numBotao[2]" [apostador_id]="apostadorSelecionado" (botao)="adicionarNumeroAposta($event)"></app-realizar-apostas>
+    <app-realizar-apostas [num_botao]="numBotao[3]" [apostador_id]="apostadorSelecionado" (botao)="adicionarNumeroAposta($event)"></app-realizar-apostas>
+    <app-realizar-apostas [num_botao]="numBotao[4]" [apostador_id]="apostadorSelecionado" (botao)="adicionarNumeroAposta($event)"></app-realizar-apostas>
+    <app-realizar-apostas [num_botao]="numBotao[5]" [apostador_id]="apostadorSelecionado" (botao)="adicionarNumeroAposta($event)"></app-realizar-apostas>
+  </div>
+</div>
+
+<div *ngIf="qtd_numeros_selecionados === dados.length * 6  && concluir_aposta === false" class="container input-qtd-apostas">
+  <h4 class="title"> Selecione a Quantidade de Apostas</h4>
+  <input type="number" class="form-control input"
+          [(ngModel)]="qtd_apostas"
+          name="qtd_apostas"
+          placeholder="Quantidade de Apostas"
+  />
+
+  <button *ngIf="qtd_apostas === ''; else confirmAposta" type="button" class="btn btn-danger btn-circle" disabled="true">Realizar Aposta</button>
+  <ng-template #confirmAposta>
+    <button (click)="gerarApostas()" class="btn btn-success">Realizar Aposta</button>
+  </ng-template>
+</div>
+
+<div class="container">
+  <h4 *ngIf="apostas_pelo_sistema.length > 0" class="title"> Resultado</h4>
+  <div *ngFor="let apostas of apostas_pelo_sistema">
+    <app-gerar-aposta-sistema></app-gerar-aposta-sistema>
+  </div>
+</div>
+
+<div *ngIf="concluir_aposta === true" class="container numeros-apostas">
+  <button (click)="limparAposta()" class="btn btn-primary">Limpar Aposta</button>
+  <button class="btn btn-danger">Selecionar Apostadores</button>
+</div>
+
+
+
+
